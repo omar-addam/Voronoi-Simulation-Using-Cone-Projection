@@ -41,6 +41,15 @@ namespace VoronoiDiagram
         /// </summary>
         private Collider2D Collider;
 
+        [Header("Regions")]
+
+        /// <summary>
+        /// References the gameobjec that will hold all generated regions.
+        /// </summary>
+        [SerializeField]
+        private GameObject RegionsParent;
+
+
         /// <summary>
         /// References the template prefab used when initializing the regions.
         /// </summary>
@@ -70,7 +79,7 @@ namespace VoronoiDiagram
             foreach(var seed in seeds)
             {
                 // Create a new region instance
-                GameObject region = Instantiate(RegionTemplate, transform);
+                GameObject region = Instantiate(RegionTemplate, RegionsParent.transform);
 
                 // Extract the script
                 DiagramRegion script = region.GetComponent<DiagramRegion>();
