@@ -27,6 +27,20 @@ namespace VoronoiDiagram.DataStructure
         /// </summary>
         public Guid Id { get { return _Id; } }
 
+        
+
+        /// <summary>
+        /// The number of segments used to create the cone projection.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The number of segments used to create the cone projection.")]
+        private int _CircleSegmentCount = 0;
+
+        /// <summary>
+        /// The number of segments used to create the cone projection.
+        /// </summary>
+        public int CircleSegmentCount { get { return _CircleSegmentCount; } }
+
 
 
         /// <summary>
