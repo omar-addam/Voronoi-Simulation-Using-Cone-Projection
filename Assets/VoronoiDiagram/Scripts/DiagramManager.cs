@@ -30,8 +30,12 @@ namespace VoronoiDiagram
         /// </summary>
         /// <param name="dimensions">The width and length of the diagram.</param>
         /// <param name="seeds">The center of each region to be created.</param>
-        public void Initialize(Vector2 dimensions, List<Seed> seeds)
+        /// <param name="expansionSpeed">The speed at which the regions expand.</param>
+        public void Initialize(Vector2 dimensions, List<Seed> seeds, float expansionSpeed = 0.0005f)
         {
+            // Set the speed
+            ExpansionSpeed = expansionSpeed;
+
             // Set the boundaries of the diagram
             InitializeBounds(dimensions);
 
@@ -61,11 +65,16 @@ namespace VoronoiDiagram
         [Header("Regions")]
 
         /// <summary>
+        /// The speed at which the regions expand.
+        /// </summary>
+        [SerializeField]
+        private float ExpansionSpeed;
+
+        /// <summary>
         /// References the gameobject that will hold all generated regions.
         /// </summary>
         [SerializeField]
         private GameObject RegionsParent;
-
 
         /// <summary>
         /// References the template prefab used when initializing the regions.
@@ -88,7 +97,7 @@ namespace VoronoiDiagram
         private void Update()
         {
             foreach (var region in Regions)
-                region.Expand(0.0005f);
+                region.Expand(ExpansionSpeed);
         }
 
         /// <summary>
