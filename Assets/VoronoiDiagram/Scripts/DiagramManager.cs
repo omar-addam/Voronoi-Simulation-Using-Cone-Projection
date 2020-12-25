@@ -27,6 +27,9 @@ namespace VoronoiDiagram
         {
             // Set the width and length of the diagram
             transform.localScale = new Vector3(dimensions.x, dimensions.y, 0);
+
+            // Create regions
+            InitializeRegions(seeds);
         }
 
         #endregion
@@ -44,6 +47,11 @@ namespace VoronoiDiagram
         [SerializeField]
         private GameObject RegionTemplate;
 
+        /// <summary>
+        /// List of all regions created in this diagram.
+        /// </summary>
+        private List<DiagramRegion> Regions;
+
         #endregion
 
         #region Methods
@@ -53,7 +61,26 @@ namespace VoronoiDiagram
         /// </summary>
         private void InitializeRegions(List<Seed> seeds)
         {
+            // Delete all current regions
+            foreach (Transform region in transform)
+                GameObject.Destroy(region.gameObject);
+            Regions = new List<DiagramRegion>();
 
+            // Create new regions
+            foreach(var seed in seeds)
+            {
+                // Create a new region instance
+                GameObject region = Instantiate(RegionTemplate, transform);
+
+                // Extract the script
+                DiagramRegion script = region.GetComponent<DiagramRegion>();
+
+                // Initialize data
+                script.Initialize(seed);
+
+                // Add to list
+                Regions.Add(script);
+            }
         }
 
         #endregion
