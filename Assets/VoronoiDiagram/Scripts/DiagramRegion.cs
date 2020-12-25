@@ -158,15 +158,21 @@ namespace VoronoiDiagram
 
         /// <summary>
         /// Checks if a point is inside the region's boundaries.
+        /// http://wiki.unity3d.com/index.php/PolyContainsPoint?_ga=2.184566697.1047169474.1608878165-1154461607.1608427118
         /// </summary>
         public bool CheckIfPointIsInside(Vector3 point)
         {
-            if (Physics.Raycast(point, point.normalized, out RaycastHit hit1, Mathf.Infinity) &&
-                Physics.Raycast(point, -point.normalized, out RaycastHit hit2, Mathf.Infinity)
-                && hit1.transform == transform && hit2.transform == transform)
-                return true;
-            Debug.Log(hit1.transform);
-            return false;
+            var j = Vertices.Length - 1;
+            var inside = false;
+            for (int i = 0; i < Vertices.Length; j = i++)
+            {
+                var pi = Vertices[i] + transform.position;
+                var pj = Vertices[j] + transform.position;
+                if (((pi.y <= point.y && point.y < pj.y) || (pj.y <= point.y && point.y < pi.y)) &&
+                    (point.x < (pj.x - pi.x) * (point.y - pi.y) / (pj.y - pi.y) + pi.x))
+                    inside = !inside;
+            }
+            return inside;
         }
 
         #endregion
