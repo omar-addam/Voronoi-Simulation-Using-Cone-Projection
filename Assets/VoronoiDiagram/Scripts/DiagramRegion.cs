@@ -75,7 +75,7 @@ namespace VoronoiDiagram
             vertices.Add(Vector3.zero);
             for (int i = 1; i < circleVertexCount; ++i)
             {
-                vertices.Add(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f));
+                vertices.Add(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * 0.05f);
                 angle -= segmentWidth;
                 if (i > 1)
                 {
