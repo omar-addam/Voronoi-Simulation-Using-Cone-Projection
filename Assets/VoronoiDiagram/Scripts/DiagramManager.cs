@@ -83,6 +83,15 @@ namespace VoronoiDiagram
         #region Methods
 
         /// <summary>
+        /// Continuously expands the boundaries of the regions.
+        /// </summary>
+        private void Update()
+        {
+            foreach (var region in Regions)
+                region.Expand(0.0005f);
+        }
+
+        /// <summary>
         /// Sets the boundaries of the diagram.
         /// </summary>
         private void InitializeBounds(Vector2 dimensions)
