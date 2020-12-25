@@ -25,6 +25,9 @@ namespace VoronoiDiagram
         public void Initialize(Seed seed)
         {
             Seed = seed;
+
+            // Set location
+            transform.localPosition = new Vector3(seed.PositionX, seed.PositionY, 0);
         }
 
         #endregion
