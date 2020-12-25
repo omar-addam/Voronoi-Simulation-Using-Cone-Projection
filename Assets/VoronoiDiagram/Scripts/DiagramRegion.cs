@@ -65,13 +65,15 @@ namespace VoronoiDiagram
         /// </summary>
         private Mesh GenerateCircleMesh(int circleSegmentCount)
         {
+            int circleVertexCount = circleSegmentCount + 2;
+            int circleIndexCount = circleSegmentCount * 3;
             var circle = new Mesh();
-            var vertices = new List<Vector3>(circleSegmentCount);
-            var indices = new int[circleSegmentCount];
+            var vertices = new List<Vector3>(circleVertexCount);
+            var indices = new int[circleIndexCount];
             var segmentWidth = Mathf.PI * 2f / circleSegmentCount;
             var angle = 0f;
             vertices.Add(Vector3.zero);
-            for (int i = 1; i < circleSegmentCount; ++i)
+            for (int i = 1; i < circleVertexCount; ++i)
             {
                 vertices.Add(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f));
                 angle -= segmentWidth;
