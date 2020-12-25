@@ -17,6 +17,12 @@ namespace VoronoiDiagram
         private void Awake()
         {
             Collider = Bounds.GetComponent<Collider2D>();
+
+            Initialize(new Vector2(8, 5), new List<Seed>()
+            {
+                new Seed(Guid.NewGuid(), 16, 1, 1, Color.red),
+                new Seed(Guid.NewGuid(), 16, -3, -3, Color.blue)
+            });
         }
 
         /// <summary>
@@ -26,8 +32,8 @@ namespace VoronoiDiagram
         /// <param name="seeds">The center of each region to be created.</param>
         public void Initialize(Vector2 dimensions, List<Seed> seeds)
         {
-            // Set the width and length of the diagram
-            Bounds.transform.localScale = new Vector3(dimensions.x, dimensions.y, 0);
+            // Set the boundaries of the diagram
+            InitializeBounds(dimensions);
 
             // Create regions
             InitializeRegions(seeds);
@@ -75,6 +81,34 @@ namespace VoronoiDiagram
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Sets the boundaries of the diagram.
+        /// </summary>
+        private void InitializeBounds(Vector2 dimensions)
+        {
+            // Create square mesh
+            Mesh square = new Mesh();
+            square.vertices = new Vector3[]
+            {
+                new Vector3(0.5f, 0.5f, 0),
+                new Vector3(-0.5f, 0.5f, 0),
+                new Vector3(-0.5f, -0.5f, 0),
+                new Vector3(0.5f, -0.5f, 0)
+            };
+            square.uv = new Vector2[4]
+            {
+                new Vector2(0.5f, 0.5f),
+                new Vector2(-0.5f, -0.5f),
+                new Vector2(0.5f, -0.5f),
+                new Vector2(-0.5f, 0.5f)
+            };
+            square.triangles = new int[] { 0, 3, 2, 2, 1, 0 };
+            Bounds.GetComponent<MeshFilter>().mesh = square;
+
+            // Set the scale
+            Bounds.transform.localScale = new Vector3(dimensions.x, dimensions.y, 1);
+        }
 
         /// <summary>
         /// Creates a single region for each provided seed.
