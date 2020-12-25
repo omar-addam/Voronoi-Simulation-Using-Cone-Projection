@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766ea6ee29ceb244da28e6d1aaf3ecc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RegionTemplate: {fileID: 2743079307499045479, guid: 3dd5f1238cb8e134683eddafdef62de7, type: 3}
