@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VoronoiDiagram.DataStructure;
 
 namespace VoronoiDiagram
 {
@@ -18,9 +19,22 @@ namespace VoronoiDiagram
             MeshFilter = GetComponent<MeshFilter>();
         }
 
+        /// <summary>
+        /// Initializes the region.
+        /// </summary>
+        public void Initialize(Seed seed)
+        {
+            Seed = seed;
+        }
+
         #endregion
 
         #region Fields/Properties
+
+        /// <summary>
+        /// The seed used to initialize the region.
+        /// </summary>
+        public Seed Seed { private set; get; }
 
         /// <summary>
         /// References the mesh renderer of this object. Used to set the color of the mesh.
