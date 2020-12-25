@@ -17,12 +17,6 @@ namespace VoronoiDiagram
         private void Awake()
         {
             Collider = Bounds.GetComponent<Collider2D>();
-
-            Initialize(new Vector2(1, 1), new List<Seed>()
-            {
-                new Seed(Guid.NewGuid(), 16, 1, 1, Color.red),
-                new Seed(Guid.NewGuid(), 16, -3, -3, Color.blue)
-            });
         }
 
         /// <summary>
@@ -33,7 +27,7 @@ namespace VoronoiDiagram
         public void Initialize(Vector2 dimensions, List<Seed> seeds)
         {
             // Set the width and length of the diagram
-            transform.localScale = new Vector3(dimensions.x, dimensions.y, 0);
+            Bounds.transform.localScale = new Vector3(dimensions.x, dimensions.y, 0);
 
             // Create regions
             InitializeRegions(seeds);
