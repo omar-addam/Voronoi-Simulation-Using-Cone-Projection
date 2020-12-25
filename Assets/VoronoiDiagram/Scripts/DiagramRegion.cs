@@ -28,6 +28,10 @@ namespace VoronoiDiagram
 
             // Set location
             transform.localPosition = new Vector3(seed.PositionX, seed.PositionY, 0);
+
+            // Set color
+            MeshRenderer.material = new Material(MeshRenderer.material);
+            MeshRenderer.material.color = seed.Color;
         }
 
         #endregion
