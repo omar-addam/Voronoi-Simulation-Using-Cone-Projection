@@ -61,6 +61,11 @@ namespace VoronoiDiagram
         /// </summary>
         private Vector3[] Vertices;
 
+        /// <summary>
+        /// The status of all the vertices. False: still requires expanding. True: done expanding.
+        /// </summary>
+        private bool[] VerticesStatus;
+
         #endregion
 
         #region Methods
@@ -95,6 +100,7 @@ namespace VoronoiDiagram
             circle.RecalculateBounds();
 
             Vertices = vertices.ToArray();
+            VerticesStatus = new bool[Vertices.Length];
             return circle;
         }
 
@@ -105,7 +111,17 @@ namespace VoronoiDiagram
         {
             // Expand the region
             for (int i = 0; i < Vertices.Length; i++)
-                Vertices[i] = Vertices[i] + Vertices[i].normalized * distance;
+            {
+                // Check if vertex is done expanding
+                if (VerticesStatus[i])
+                    continue;
+
+                // Compute new position
+                Vector2 newPosition = Vertices[i] + Vertices[i].normalized * distance;
+
+                // Set new position
+                Vertices[i] = newPosition;
+            }
             MeshFilter.mesh.vertices = Vertices;
         }
 
