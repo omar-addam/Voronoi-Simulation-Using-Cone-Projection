@@ -97,7 +97,7 @@ namespace VoronoiDiagram
         private void Update()
         {
             foreach (var region in Regions)
-                region.Expand(ExpansionSpeed);
+                region.Expand(ExpansionSpeed, Collider);
         }
 
         /// <summary>

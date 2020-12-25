@@ -107,7 +107,8 @@ namespace VoronoiDiagram
         /// <summary>
         /// Expands the boundaries of the region.
         /// </summary>
-        public void Expand(float distance)
+        /// <param name="distance">The speed at which the region expands.</param>
+        public void Expand(float distance, Collider2D diagramBoundaries)
         {
             // Expand the region
             for (int i = 0; i < Vertices.Length; i++)
@@ -117,7 +118,14 @@ namespace VoronoiDiagram
                     continue;
 
                 // Compute new position
-                Vector2 newPosition = Vertices[i] + Vertices[i].normalized * distance;
+                Vector3 newPosition = Vertices[i] + Vertices[i].normalized * distance;
+
+                // Check if the new point is outside the diagram's boundaries
+                if (!diagramBoundaries.bounds.Contains(newPosition + transform.position))
+                {
+                    VerticesStatus[i] = true;
+                    continue;
+                }
 
                 // Set new position
                 Vertices[i] = newPosition;
