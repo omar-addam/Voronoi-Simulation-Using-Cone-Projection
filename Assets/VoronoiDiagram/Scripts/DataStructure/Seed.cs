@@ -9,7 +9,39 @@ namespace VoronoiDiagram.DataStructure
 
         #region Constructors
 
+        /// <summary>
+        /// Empty constructor.
+        /// </summary>
+        public Seed()
+            : this(Guid.NewGuid(), 16, 0, 0, Color.white)
+        {
+        }
 
+        /// <summary>
+        /// Default constructor.
+        /// <param name="id">Unique identifier used by items to link them to this category.</param>
+        /// <param name="circleSegmentCount">The number of segments used to create the cone projection.</param>
+        /// <param name="positionX">The x position of the seed.</param>
+        /// <param name="positionY">The y position of the seed.</param>
+        /// <param name="color">The color used to display the region generated from this seed.</param>
+        /// </summary>
+        public Seed(Guid id, int circleSegmentCount, float positionX, float positionY, Color color)
+        {
+            _Id = id;
+            _CircleSegmentCount = circleSegmentCount;
+            _PositionX = positionX;
+            _PositionY = positionY;
+            _Color = color;
+        }
+
+        /// <summary>
+        /// Clone constructor.
+        /// </summary>
+        /// <param name="seed">Instance to clone.</param>
+        public Seed(Seed seed)
+            : this(seed.Id, seed.CircleSegmentCount, seed.PositionX, seed.PositionY, seed.Color)
+        {
+        }
 
         #endregion
 
