@@ -32,6 +32,9 @@ namespace VoronoiDiagram
             // Set color
             MeshRenderer.material = new Material(MeshRenderer.material);
             MeshRenderer.material.color = seed.Color;
+
+            // Generate a circular mesh
+            MeshFilter.mesh = GenerateCircleMesh(seed.CircleSegmentCount);
         }
 
         #endregion
@@ -57,7 +60,34 @@ namespace VoronoiDiagram
 
         #region Methods
 
-
+        /// <summary>
+        /// Generates a 2d mesh in the form of a circle.
+        /// </summary>
+        private Mesh GenerateCircleMesh(int circleSegmentCount)
+        {
+            var circle = new Mesh();
+            var vertices = new List<Vector3>(circleSegmentCount);
+            var indices = new int[circleSegmentCount];
+            var segmentWidth = Mathf.PI * 2f / circleSegmentCount;
+            var angle = 0f;
+            vertices.Add(Vector3.zero);
+            for (int i = 1; i < circleSegmentCount; ++i)
+            {
+                vertices.Add(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f));
+                angle -= segmentWidth;
+                if (i > 1)
+                {
+                    var j = (i - 2) * 3;
+                    indices[j + 0] = 0;
+                    indices[j + 1] = i - 1;
+                    indices[j + 2] = i;
+                }
+            }
+            circle.SetVertices(vertices);
+            circle.SetIndices(indices, MeshTopology.Triangles, 0);
+            circle.RecalculateBounds();
+            return circle;
+        }
 
         #endregion
 
