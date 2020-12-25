@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace VoronoiDiagram
         /// </summary>
         private void Awake()
         {
-            Collider = GetComponent<Collider2D>();
+            Collider = Bounds.GetComponent<Collider2D>();
         }
 
         /// <summary>
@@ -36,15 +37,25 @@ namespace VoronoiDiagram
 
         #region Fields/Properties
 
+        [Header("Bounds")]
+
+        /// <summary>
+        /// References the gameobject that represents the bounds of the diagram.
+        /// </summary>
+        [SerializeField]
+        private GameObject Bounds;
+
         /// <summary>
         /// References the collider of the diagram that will be used to determine its bounds.
         /// </summary>
         private Collider2D Collider;
 
+
+
         [Header("Regions")]
 
         /// <summary>
-        /// References the gameobjec that will hold all generated regions.
+        /// References the gameobject that will hold all generated regions.
         /// </summary>
         [SerializeField]
         private GameObject RegionsParent;
