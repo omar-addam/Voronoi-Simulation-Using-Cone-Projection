@@ -17,6 +17,7 @@ namespace VoronoiDiagram
         {
             MeshRenderer = GetComponent<MeshRenderer>();
             MeshFilter = GetComponent<MeshFilter>();
+            MeshCollider = GetComponent<MeshCollider>();
         }
 
         /// <summary>
@@ -35,6 +36,7 @@ namespace VoronoiDiagram
 
             // Generate a circular mesh
             MeshFilter.mesh = GenerateCircleMesh(seed.CircleSegmentCount);
+            MeshCollider.sharedMesh = MeshFilter.mesh;
         }
 
         #endregion
@@ -55,6 +57,11 @@ namespace VoronoiDiagram
         /// References the mesh filter of this object. Used to set the mesh.
         /// </summary>
         private MeshFilter MeshFilter;
+
+        /// <summary>
+        /// References the mesh collider of this object.
+        /// </summary>
+        private MeshCollider MeshCollider;
 
         /// <summary>
         /// All vertices used to set the bounds of the mesh.
@@ -108,7 +115,7 @@ namespace VoronoiDiagram
         /// Expands the boundaries of the region.
         /// </summary>
         /// <param name="distance">The speed at which the region expands.</param>
-        public void Expand(float distance, Collider2D diagramBoundaries)
+        public void Expand(float distance, Collider2D diagramBoundaries, List<DiagramRegion> regions)
         {
             // Expand the region
             for (int i = 0; i < Vertices.Length; i++)
@@ -127,10 +134,39 @@ namespace VoronoiDiagram
                     continue;
                 }
 
+                // Check if the new point is inside any other region
+                bool insideRegion = false;
+                foreach (var region in regions)
+                    if (region.Seed.Id != Seed.Id
+                        && region.CheckIfPointIsInside(newPosition + transform.position))
+                    {
+                        VerticesStatus[i] = true;
+                        insideRegion = true;
+                        break;
+                    }
+                if (insideRegion)
+                    continue;
+
                 // Set new position
                 Vertices[i] = newPosition;
             }
+
             MeshFilter.mesh.vertices = Vertices;
+            MeshCollider.sharedMesh = null;
+            MeshCollider.sharedMesh = MeshFilter.mesh;
+        }
+
+        /// <summary>
+        /// Checks if a point is inside the region's boundaries.
+        /// </summary>
+        public bool CheckIfPointIsInside(Vector3 point)
+        {
+            if (Physics.Raycast(point, point.normalized, out RaycastHit hit1, Mathf.Infinity) &&
+                Physics.Raycast(point, -point.normalized, out RaycastHit hit2, Mathf.Infinity)
+                && hit1.transform == transform && hit2.transform == transform)
+                return true;
+            Debug.Log(hit1.transform);
+            return false;
         }
 
         #endregion

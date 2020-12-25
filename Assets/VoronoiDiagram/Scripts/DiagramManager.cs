@@ -20,8 +20,8 @@ namespace VoronoiDiagram
 
             Initialize(new Vector2(20f, 9.5f), new List<Seed>()
             {
-                new Seed(Guid.NewGuid(), 16, 1, 1, Color.red),
-                new Seed(Guid.NewGuid(), 16, -3, -3, Color.blue)
+                new Seed(Guid.NewGuid(), 5, 1, 1, Color.red),
+                new Seed(Guid.NewGuid(), 5, -3, -3, Color.blue)
             });
         }
 
@@ -92,15 +92,6 @@ namespace VoronoiDiagram
         #region Methods
 
         /// <summary>
-        /// Continuously expands the boundaries of the regions.
-        /// </summary>
-        private void Update()
-        {
-            foreach (var region in Regions)
-                region.Expand(ExpansionSpeed, Collider);
-        }
-
-        /// <summary>
         /// Sets the boundaries of the diagram.
         /// </summary>
         private void InitializeBounds(Vector2 dimensions)
@@ -153,6 +144,15 @@ namespace VoronoiDiagram
                 // Add to list
                 Regions.Add(script);
             }
+        }
+
+        /// <summary>
+        /// Continuously expands the boundaries of the regions.
+        /// </summary>
+        private void Update()
+        {
+            foreach (var region in Regions)
+                region.Expand(ExpansionSpeed, Collider, Regions);
         }
 
         #endregion
