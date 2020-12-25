@@ -17,6 +17,12 @@ namespace VoronoiDiagram
         private void Awake()
         {
             Collider = Bounds.GetComponent<Collider2D>();
+
+            Initialize(new Vector2(1, 1), new List<Seed>()
+            {
+                new Seed(Guid.NewGuid(), 16, 1, 1, Color.red),
+                new Seed(Guid.NewGuid(), 16, -3, -3, Color.blue)
+            });
         }
 
         /// <summary>
@@ -82,7 +88,7 @@ namespace VoronoiDiagram
         private void InitializeRegions(List<Seed> seeds)
         {
             // Delete all current regions
-            foreach (Transform region in transform)
+            foreach (Transform region in RegionsParent.transform)
                 GameObject.Destroy(region.gameObject);
             Regions = new List<DiagramRegion>();
 
