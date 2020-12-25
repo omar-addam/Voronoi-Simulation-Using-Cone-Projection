@@ -59,7 +59,7 @@ namespace VoronoiDiagram
         /// <summary>
         /// All vertices used to set the bounds of the mesh.
         /// </summary>
-        private List<Vector3> Vertices;
+        private Vector3[] Vertices;
 
         #endregion
 
@@ -94,7 +94,7 @@ namespace VoronoiDiagram
             circle.SetIndices(indices, MeshTopology.Triangles, 0);
             circle.RecalculateBounds();
 
-            Vertices = vertices;
+            Vertices = vertices.ToArray();
             return circle;
         }
 
@@ -104,9 +104,9 @@ namespace VoronoiDiagram
         public void Expand(float distance)
         {
             // Expand the region
-            for (int i = 0; i < Vertices.Count; i++)
+            for (int i = 0; i < Vertices.Length; i++)
                 Vertices[i] = Vertices[i] + Vertices[i].normalized * distance;
-            MeshFilter.mesh.vertices = Vertices.ToArray();
+            MeshFilter.mesh.vertices = Vertices;
         }
 
         #endregion
