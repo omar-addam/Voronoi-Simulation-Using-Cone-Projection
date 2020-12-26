@@ -145,6 +145,8 @@ namespace VoronoiDiagram
         /// </summary>
         private void Update()
         {
+            if (Regions == null)
+                return;
             foreach (var region in Regions)
                 region.Expand(ExpansionSpeed, Collider, Regions);
         }
