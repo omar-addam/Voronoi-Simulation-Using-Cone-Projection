@@ -17,12 +17,6 @@ namespace VoronoiDiagram
         private void Awake()
         {
             Collider = Bounds.GetComponent<Collider2D>();
-
-            Initialize(new Vector2(20f, 9.5f), new List<Seed>()
-            {
-                new Seed(Guid.NewGuid(), 5, 1, 1, Color.red),
-                new Seed(Guid.NewGuid(), 5, -3, -3, Color.blue)
-            });
         }
 
         /// <summary>
