@@ -79,6 +79,20 @@ public class MainSceneManager : MonoBehaviour
         }, SIMULATION_SPEED);
     }
 
+    /// <summary>
+    /// Generates 4 regions sample.
+    /// </summary>
+    public void Generate4RegionsSample()
+    {
+        Diagram.Initialize(new Vector2(DIARGRAM_WIDTH, DIARGRAM_HEIGHT), new List<Seed>()
+        {
+            new Seed(Guid.NewGuid(), CIRLCE_SEGMENTS_COUNT, 0.5f, 0.5f, Color.red),
+            new Seed(Guid.NewGuid(), CIRLCE_SEGMENTS_COUNT, 0f, 0f, Color.cyan),
+            new Seed(Guid.NewGuid(), CIRLCE_SEGMENTS_COUNT, -1.5f, -1.5f, Color.blue),
+            new Seed(Guid.NewGuid(), CIRLCE_SEGMENTS_COUNT, -0.5f, -1.5f, Color.green)
+        }, SIMULATION_SPEED);
+    }
+
     #endregion
 
 }
