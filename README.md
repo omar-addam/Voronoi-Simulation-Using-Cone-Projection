@@ -7,7 +7,7 @@ The developed solution follows an emergent-behavior approach for computing the r
 
 | Initialization | Expansion | Termination |
 | :-----: | :-------: | :-------: |
-| <img src="docs/Initialization.png" height="200" /> | <img src="docs/Expansion.png" height="200" />   | <img src="docs/Termination.png" height="200" />   |
+| <img src="docs/Initialization.gif" height="200" /> | <img src="docs/Expansion.gif" height="200" />   | <img src="docs/Termination.gif" height="200" />   |
 
 # Demo
 
