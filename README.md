@@ -1,7 +1,13 @@
 # Voronoi-Simulation-Using-Cone-Projection
-This project simulates the generation of voronoi diagrams. It uses the cone projection approach for approximately computing the regions.
+This project simulates the generation of voronoi diagrams. It uses an approach that I have created, similar to the cone projection approach for approximately computing the regions.  
 
 ` IMPORTANT: The code is not optimized for handling large number of regions. It is only meant for demonstration purposes.`
+
+The developed solution follows an emergent-behavior approach for computing the regions. It consists of three simple steps.
+
+| Initialization | Expansion | Termination |
+| :-----: | :-------: | :-------: |
+| <img src="docs/Initialization.png" height="200" /> | <img src="docs/Expansion.png" height="200" />   | <img src="docs/Termination.png" height="200" />   |
 
 # Demo
 
