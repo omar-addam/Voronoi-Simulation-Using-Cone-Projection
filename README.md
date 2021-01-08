@@ -7,7 +7,7 @@ The developed solution follows an emergent-behavior approach for computing the r
 
 1) **Initialization**: During this phase, each seed gets an initial region. The region is created by defined number of segments, forming a circular region. The higher the number of segments used, the smoother the circle is, and the more accurate the simulation is.
 2) **Expansion**: Once the regions are initialized, all vertices start expanding away from the center of the circle.
-3) **Termination**: 
+3) **Termination**: Once a vertex reaches a collider, it will stop moving. The rest of the vertices will continue expanding until they also reach a blocker.
 
 | Initialization | Expansion | Termination |
 | :-----: | :-------: | :-------: |
