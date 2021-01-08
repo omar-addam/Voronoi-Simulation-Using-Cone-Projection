@@ -6,7 +6,7 @@ This project simulates the generation of voronoi diagrams. It uses an approach t
 The developed solution follows an emergent-behavior approach for computing the regions. It consists of three simple steps.
 
 1) **Initialization**: During this phase, each seed gets an initial region. The region is created by defined number of segments, forming a circular region. The higher the number of segments used, the smoother the circle is, and the more accurate the simulation is.
-2) **Expansion**: 
+2) **Expansion**: Once the regions are initialized, all vertices start expanding away from the center of the circle.
 3) **Termination**: 
 
 | Initialization | Expansion | Termination |
