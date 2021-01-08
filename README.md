@@ -52,9 +52,9 @@ git flow init
 
 * Line ending: CRLF
 * Case styles: Camel, Pascal, and Snake case
-  * Arguments, paramters, and local variables: camel case (e.g. kanbanBoard)
+  * Arguments, paramters, and local variables: camel case (e.g. diagramRegion)
   * Global variables: pascal case (e.g. SeedItems)
-  * Constants and static variables: snake case (ALL CAPS) (e.g. DEFAULT_CATEGORY_NAME)
+  * Constants and static variables: snake case (ALL CAPS) (e.g. DIAGRAM_WIDTH)
 * Methods naming convention:
   * Pascal case (e.g. GenerateSample)
   * Verbs
@@ -71,6 +71,6 @@ git flow init
 
 ### Assets / Others
 
-* All components should be included under Assets/\<Name> folder. (e.g. Assets/KanbanBoard)
+* All components should be included under Assets/\<Name> folder. (e.g. Assets/VoronoiDiagram)
 * Each component should be isolated and under **NO CIRCUMSTANCES** referencing or using another component's scripts.
 * Components are **NOT** allowed to reference or call application/demo scripts.
