@@ -21,9 +21,10 @@ namespace VoronoiDiagram
         /// <summary>
         /// Initializes the region.
         /// </summary>
-        public void Initialize(Seed seed)
+        public void Initialize(Seed seed, DiagramManager diagram)
         {
             Seed = seed;
+            Diagram = diagram;
 
             // Set location
             transform.localPosition = new Vector3(seed.PositionX, seed.PositionY, 0);
@@ -45,6 +46,11 @@ namespace VoronoiDiagram
         /// The seed used to initialize the region.
         /// </summary>
         public Seed Seed { private set; get; }
+
+        /// <summary>
+        /// The diagram that this region is bounded by.
+        /// </summary>
+        private DiagramManager Diagram;
 
         /// <summary>
         /// References the mesh filter of this object. Used to set the mesh.
@@ -100,10 +106,21 @@ namespace VoronoiDiagram
         }
 
         /// <summary>
+        /// Continuously expands the boundaries of this region.
+        /// </summary>
+        private void Update()
+        {
+            if (Diagram == null)
+                return;
+
+            Expand(Diagram.ExpansionSpeed, Diagram.Collider, Diagram.Regions);
+        }
+
+        /// <summary>
         /// Expands the boundaries of the region.
         /// </summary>
         /// <param name="distance">The speed at which the region expands.</param>
-        public void Expand(float distance, Collider2D diagramBoundaries, List<DiagramRegion> regions)
+        private void Expand(float distance, Collider2D diagramBoundaries, List<DiagramRegion> regions)
         {
             // Expand the region
             for (int i = 0; i < Vertices.Length; i++)
