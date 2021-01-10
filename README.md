@@ -101,3 +101,8 @@ A *DiagramRegion* represents a 2D mesh that gets created and managed by its scri
   * Expand: expands the boundaries of the region by attempting to move all the verticies away from the center of the region.
 
 ### Diagram
+
+A visualization system that uses the *DiagramRegion* rpefab to form the voronoi regions.
+* Prefab: Assets/VoronoiDiagram/Prefabs/Diagram.prefab
+* Script: Assets/VoronoiDiagram/Scripts/DiagramManager.cs
+  * Initialize: initializes the visualization by defining its borders, the speed of the simulation, and initializing the regions.
