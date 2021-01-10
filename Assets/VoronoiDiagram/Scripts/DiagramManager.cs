@@ -149,17 +149,6 @@ namespace VoronoiDiagram
             }
         }
 
-        /// <summary>
-        /// Continuously expands the boundaries of the regions.
-        /// </summary>
-        private void Update()
-        {
-            if (Regions == null)
-                return;
-            foreach (var region in Regions)
-                region.Expand(_ExpansionSpeed, Collider, Regions);
-        }
-
         #endregion
 
     }
