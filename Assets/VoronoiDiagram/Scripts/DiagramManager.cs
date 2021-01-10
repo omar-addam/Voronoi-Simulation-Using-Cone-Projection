@@ -28,7 +28,7 @@ namespace VoronoiDiagram
         public void Initialize(Vector2 dimensions, List<Seed> seeds, float expansionSpeed = 0.0005f)
         {
             // Set the speed
-            ExpansionSpeed = expansionSpeed;
+            _ExpansionSpeed = expansionSpeed;
 
             // Set the boundaries of the diagram
             InitializeBounds(dimensions);
@@ -47,6 +47,7 @@ namespace VoronoiDiagram
         /// References the gameobject that represents the bounds of the diagram.
         /// </summary>
         [SerializeField]
+        [Tooltip("References the gameobject that represents the bounds of the diagram.")]
         private GameObject Bounds;
 
         /// <summary>
@@ -62,18 +63,26 @@ namespace VoronoiDiagram
         /// The speed at which the regions expand.
         /// </summary>
         [SerializeField]
-        private float ExpansionSpeed;
+        [Tooltip("The speed at which the regions expand.")]
+        private float _ExpansionSpeed;
+
+        /// <summary>
+        /// The speed at which the regions expand.
+        /// </summary>
+        public float ExpansionSpeed { get { return _ExpansionSpeed; } }
 
         /// <summary>
         /// References the gameobject that will hold all generated regions.
         /// </summary>
         [SerializeField]
+        [Tooltip("References the gameobject that will hold all generated regions.")]
         private GameObject RegionsParent;
 
         /// <summary>
         /// References the template prefab used when initializing the regions.
         /// </summary>
         [SerializeField]
+        [Tooltip("References the template prefab used when initializing the regions.")]
         private GameObject RegionTemplate;
 
         /// <summary>
@@ -148,7 +157,7 @@ namespace VoronoiDiagram
             if (Regions == null)
                 return;
             foreach (var region in Regions)
-                region.Expand(ExpansionSpeed, Collider, Regions);
+                region.Expand(_ExpansionSpeed, Collider, Regions);
         }
 
         #endregion
