@@ -52,7 +52,7 @@ namespace VoronoiDiagram
         /// <summary>
         /// References the collider of the diagram that will be used to determine its bounds.
         /// </summary>
-        private Collider2D Collider;
+        public Collider2D Collider { private set; get; }
 
 
 
