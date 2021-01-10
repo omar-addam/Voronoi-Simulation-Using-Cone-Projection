@@ -74,3 +74,15 @@ git flow init
 * All components should be included under Assets/\<Name> folder. (e.g. Assets/VoronoiDiagram)
 * Each component should be isolated and under **NO CIRCUMSTANCES** referencing or using another component's scripts.
 * Components are **NOT** allowed to reference or call application/demo scripts.
+
+# Code Based Documentation
+
+## Assets / VoronoiDiagram
+
+This folder contains an implementation of voronoi diagram. The diagram consists of two components in addition to the data structure.
+
+### DataStructure
+
+### DiagramRegion
+
+### Diagram
