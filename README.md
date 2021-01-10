@@ -83,6 +83,15 @@ This folder contains an implementation of voronoi diagram. The diagram consists 
 
 ### DataStructure
 
+The data structure contains one single class.
+
+* **Seed**: used by the voronoi diagram to create the initial regions.
+  * Properties
+    * **CircleSegmentCount**: the number of segments used to create the initial region. The higher the number is, the more accurate the visualization is.
+    * **PositionX**: the center's x coordinate of the initial region.
+    * **PositionY**: the center's y coordinate of the initial region.
+    * **Color**: applied to the region initialized by this seed.
+
 ### DiagramRegion
 
 ### Diagram
