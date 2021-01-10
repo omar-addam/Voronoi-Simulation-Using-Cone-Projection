@@ -15,9 +15,7 @@ namespace VoronoiDiagram
         /// </summary>
         private void Awake()
         {
-            MeshRenderer = GetComponent<MeshRenderer>();
             MeshFilter = GetComponent<MeshFilter>();
-            MeshCollider = GetComponent<MeshCollider>();
         }
 
         /// <summary>
@@ -31,12 +29,12 @@ namespace VoronoiDiagram
             transform.localPosition = new Vector3(seed.PositionX, seed.PositionY, 0);
 
             // Set color
-            MeshRenderer.material = new Material(MeshRenderer.material);
-            MeshRenderer.material.color = seed.Color;
+            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer.material = new Material(meshRenderer.material);
+            meshRenderer.material.color = seed.Color;
 
             // Generate a circular mesh
             MeshFilter.mesh = GenerateCircleMesh(seed.CircleSegmentCount);
-            MeshCollider.sharedMesh = MeshFilter.mesh;
         }
 
         #endregion
@@ -49,19 +47,9 @@ namespace VoronoiDiagram
         public Seed Seed { private set; get; }
 
         /// <summary>
-        /// References the mesh renderer of this object. Used to set the color of the mesh.
-        /// </summary>
-        private MeshRenderer MeshRenderer;
-
-        /// <summary>
         /// References the mesh filter of this object. Used to set the mesh.
         /// </summary>
         private MeshFilter MeshFilter;
-
-        /// <summary>
-        /// References the mesh collider of this object.
-        /// </summary>
-        private MeshCollider MeshCollider;
 
         /// <summary>
         /// All vertices used to set the bounds of the mesh.
@@ -152,15 +140,13 @@ namespace VoronoiDiagram
             }
 
             MeshFilter.mesh.vertices = Vertices;
-            MeshCollider.sharedMesh = null;
-            MeshCollider.sharedMesh = MeshFilter.mesh;
         }
 
         /// <summary>
         /// Checks if a point is inside the region's boundaries.
         /// http://wiki.unity3d.com/index.php/PolyContainsPoint?_ga=2.184566697.1047169474.1608878165-1154461607.1608427118
         /// </summary>
-        public bool CheckIfPointIsInside(Vector3 point)
+        private bool CheckIfPointIsInside(Vector3 point)
         {
             var j = Vertices.Length - 1;
             var inside = false;

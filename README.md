@@ -1,7 +1,17 @@
 # Voronoi-Simulation-Using-Cone-Projection
-This project simulates the generation of voronoi diagrams. It uses the cone projection approach for approximately computing the regions.
+This project simulates the generation of voronoi diagrams. It uses an approach that I have created, similar to the cone projection approach for approximately computing the regions.  
 
 ` IMPORTANT: The code is not optimized for handling large number of regions. It is only meant for demonstration purposes.`
+
+The developed solution follows an emergent-behavior approach for computing the regions. It consists of three simple steps.
+
+1) **Initialization**: During this phase, each seed gets an initial region. The region is created by defined number of segments, forming a circular region. The higher the number of segments used, the smoother the circle is, and the more accurate the simulation is.
+2) **Expansion**: Once the regions are initialized, all vertices start expanding away from the center of the circle.
+3) **Termination**: Once a vertex reaches a collider, it will stop moving. The rest of the vertices will continue expanding until they also reach a blocker.
+
+| Initialization | Expansion | Termination |
+| :-----: | :-------: | :-------: |
+| <img src="docs/Initialization.gif" height="200" /> | <img src="docs/Expansion.gif" height="200" /> | <img src="docs/Termination.gif" height="200" /> |
 
 # Demo
 
@@ -42,9 +52,9 @@ git flow init
 
 * Line ending: CRLF
 * Case styles: Camel, Pascal, and Snake case
-  * Arguments, paramters, and local variables: camel case (e.g. kanbanBoard)
+  * Arguments, paramters, and local variables: camel case (e.g. diagramRegion)
   * Global variables: pascal case (e.g. SeedItems)
-  * Constants and static variables: snake case (ALL CAPS) (e.g. DEFAULT_CATEGORY_NAME)
+  * Constants and static variables: snake case (ALL CAPS) (e.g. DIAGRAM_WIDTH)
 * Methods naming convention:
   * Pascal case (e.g. GenerateSample)
   * Verbs
@@ -61,6 +71,38 @@ git flow init
 
 ### Assets / Others
 
-* All components should be included under Assets/\<Name> folder. (e.g. Assets/KanbanBoard)
+* All components should be included under Assets/\<Name> folder. (e.g. Assets/VoronoiDiagram)
 * Each component should be isolated and under **NO CIRCUMSTANCES** referencing or using another component's scripts.
 * Components are **NOT** allowed to reference or call application/demo scripts.
+
+# Code Based Documentation
+
+## Assets / VoronoiDiagram
+
+This folder contains an implementation of voronoi diagram. The diagram consists of two components in addition to the data structure.
+
+### DataStructure
+
+The data structure contains one single class.
+
+* **Seed**: used by the voronoi diagram to create the initial regions.
+  * Properties
+    * **CircleSegmentCount**: the number of segments used to create the initial region. The higher the number is, the more accurate the visualization is.
+    * **PositionX**: the center's x coordinate of the initial region.
+    * **PositionY**: the center's y coordinate of the initial region.
+    * **Color**: applied to the region initialized by this seed.
+
+### DiagramRegion
+
+A *DiagramRegion* represents a 2D mesh that gets created and managed by its script. It is used as a template by the diagram component when displaying regions.
+* Prefab: Assets/VoronoiDiagram/Prefabs/DiagramRegion.prefab
+* Script: Assets/VoronoiDiagram/Scripts/DiagramRegion.cs
+  * Initialize: creates a 2D circular mesh and sets its color and position based on a seed.
+  * Expand: called every frame to expand the boundaries of the region by attempting to move all the verticies away from the center of the region.
+
+### Diagram
+
+A visualization system that uses the *DiagramRegion* rpefab to form the voronoi regions.
+* Prefab: Assets/VoronoiDiagram/Prefabs/Diagram.prefab
+* Script: Assets/VoronoiDiagram/Scripts/DiagramManager.cs
+  * Initialize: initializes the visualization by defining its borders, the speed of the simulation, and initializing the regions.
