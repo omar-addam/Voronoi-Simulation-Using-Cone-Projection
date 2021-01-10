@@ -133,7 +133,7 @@ namespace VoronoiDiagram
                 DiagramRegion script = region.GetComponent<DiagramRegion>();
 
                 // Initialize data
-                script.Initialize(seed);
+                script.Initialize(seed, this);
 
                 // Add to list
                 Regions.Add(script);

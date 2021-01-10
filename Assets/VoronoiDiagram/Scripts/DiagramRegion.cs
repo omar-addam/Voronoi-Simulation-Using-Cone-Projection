@@ -21,9 +21,10 @@ namespace VoronoiDiagram
         /// <summary>
         /// Initializes the region.
         /// </summary>
-        public void Initialize(Seed seed)
+        public void Initialize(Seed seed, DiagramManager diagram)
         {
             Seed = seed;
+            Diagram = diagram;
 
             // Set location
             transform.localPosition = new Vector3(seed.PositionX, seed.PositionY, 0);
@@ -45,6 +46,11 @@ namespace VoronoiDiagram
         /// The seed used to initialize the region.
         /// </summary>
         public Seed Seed { private set; get; }
+
+        /// <summary>
+        /// The diagram that this region is bounded by.
+        /// </summary>
+        private DiagramManager Diagram;
 
         /// <summary>
         /// References the mesh filter of this object. Used to set the mesh.
