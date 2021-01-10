@@ -98,7 +98,7 @@ A *DiagramRegion* represents a 2D mesh that gets created and managed by its scri
 * Prefab: Assets/VoronoiDiagram/Prefabs/DiagramRegion.prefab
 * Script: Assets/VoronoiDiagram/Scripts/DiagramRegion.cs
   * Initialize: creates a 2D circular mesh and sets its color and position based on a seed.
-  * Expand: expands the boundaries of the region by attempting to move all the verticies away from the center of the region.
+  * Expand: called every frame to expand the boundaries of the region by attempting to move all the verticies away from the center of the region.
 
 ### Diagram
 
